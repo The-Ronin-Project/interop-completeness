@@ -1,0 +1,7 @@
+services:
+  completeness-server:
+    restart: on-failure
+    build: ../../..
+    image: interop-completeness-server:local
+    ports:
+      - "8080:8080"

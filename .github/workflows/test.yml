@@ -1,0 +1,24 @@
+name: Tests
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: oci-shared
+    steps:
+      - name: Setup JDK
+        uses: projectronin/github/.github/actions/setup-jdk-build@setup-jdk-build/v1
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build and Test
+        uses: projectronin/github/.github/actions/basic-gradle-build-publish@basic_gradle_build_publish/v5
+        with:
+          nexus_user: ${{ secrets.NEXUS_MAVEN_USER }}
+          nexus_token: ${{ secrets.NEXUS_MAVEN_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          sonar_token: ${{ secrets.SONAR_TOKEN }}
+          sonar_host_url: ${{ secrets.SONAR_HOST_URL }}
+          dd-api-key: ${{ secrets.DATADOG_API_KEY }}
+          dd-service-name: interop-completeness
+          publish: false
