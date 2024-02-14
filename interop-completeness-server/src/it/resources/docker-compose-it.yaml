@@ -3,5 +3,63 @@ services:
     restart: on-failure
     build: ../../..
     image: interop-completeness-server:local
+    # This is needed in order to set the truststore from ADB so we have access to use it.
+    entrypoint:
+      - "java"
+      - "-Djavax.net.ssl.keyStore=/app/tls_wallet/keystore.jks"
+      - "-Djavax.net.ssl.keyStorePassword=Longpassword1"
+      - "-Djavax.net.ssl.trustStore=/app/tls_wallet/truststore.jks"
+      - "-Djavax.net.ssl.trustStorePassword=Longpassword1"
+      - "-jar"
+      - "app.jar"
+    volumes:
+      - ../../../build/resources/it/tls_wallet:/app/tls_wallet
     ports:
       - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:oracle:thin:admin/Longpassword1@(description=(retry_count=0)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb_free))(connect_data=(service_name=my_atp_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=no)))"
+    healthcheck:
+      test: [ "CMD", "curl", "-k", "-X", "GET", "localhost:8080/actuator/health" ]
+      timeout: 5s
+      retries: 30
+    depends_on:
+      adb_config:
+        condition: service_completed_successfully
+
+  adb_free:
+    restart: on-failure
+    image: container-registry.oracle.com/database/adb-free:latest
+    container_name: adb_free
+    hostname: localhost
+    environment:
+      WORKLOAD_TYPE: ATP
+      WALLET_PASSWORD: Longpassword1
+      ADMIN_PASSWORD: Longpassword1
+    ports:
+      - "1522:1522"
+      - "8443:8443"
+      - "27017:27017"
+    expose:
+      - "1522"
+      - "27017"
+    cap_add:
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse
+    healthcheck:
+      test: [ "CMD", "/bin/bash", "/u01/scripts/healthcheck.sh" ]
+      interval: 1m
+      timeout: 30s
+      start_period: 3m
+
+  adb_config:
+    image: docker
+    privileged: true
+    volumes:
+      - ./adb_config.sh:/adb_config.sh
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../../../build/resources/it/tls_wallet:/tmp/adb-free/tls_wallet
+    command: sh -c /adb_config.sh
+    depends_on:
+      adb_free:
+        condition: service_healthy

@@ -104,8 +104,11 @@ type Run {
   description: String
   "The ID of the run. A UUID"
   id: String!
+  "The list of initial resources in this run that trigger the loading of other resources"
   initialLoadResources: [FhirResource!]!
+  "The resources in this run that that had loading triggered by one of the initial resources grouped by resource type"
   loadedResources(resourceTypes: [String!]!): [ResourceNodeResult!]!
+  "The results of all the data loads for the run"
   resourceResults: [ResourceNodeResult!]!
   "Status of the run"
   result: RunStatus!

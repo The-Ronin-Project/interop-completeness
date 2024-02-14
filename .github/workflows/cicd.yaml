@@ -41,7 +41,7 @@ jobs:
         uses: projectronin/github/build-image@build-image/v3
         with:
           image: interop-completeness
-          build-args: "JAR_NAME=interop-completeness"
+          build-args: "JAR_NAME=interop-completeness-server"
           tags: "${{ github.sha }},${{ steps.get-version.outputs.version }}"
           docker-context-directory: ./interop-completeness-server
           push: "${{ github.ref_name == 'main' }}"
