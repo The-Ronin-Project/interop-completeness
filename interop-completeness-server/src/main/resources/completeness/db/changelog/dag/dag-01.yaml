@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: dag-create
+      author: Will Sun
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            - tableExists:
+                tableName: dag
+      changes:
+        - createTable:
+            tableName: dag
+            columns:
+              - column:
+                  name: id
+                  # This is stored as a BINARY as an optimization for storing UUIDs.
+                  type: BINARY(16)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_dag_id
+              - column:
+                  name: resource
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: subscribes_to
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: create_dt_tm
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: event_dt_tm
+                  type: DATETIME(6)
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: dag
+            columnNames: resource, subscribes_to

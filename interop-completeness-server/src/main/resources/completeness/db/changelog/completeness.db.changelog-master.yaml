@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: completeness/db/changelog/completeness.db.changelog-1.0.0.yaml
