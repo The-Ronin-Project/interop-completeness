@@ -14,6 +14,9 @@ dependencies {
     implementation(libs.spring.boot.starter)
     implementation(libs.spring.boot.starter.actuator)
     implementation(libs.spring.boot.starter.web)
+    implementation(libs.spring.boot.starter.data.mongodb)
+
+    implementation(libs.interop.event.completeness)
 
     implementation(libs.spring.kafka)
 
@@ -33,7 +36,12 @@ dependencies {
     // Needed to format logs for DataDog
     runtimeOnly(libs.logstash.logback.encoder)
 
+    testImplementation(platform(libs.testcontainers.bom))
     testImplementation(libs.mockk)
+    testImplementation(libs.spring.boot.starter.test)
+    testImplementation("org.testcontainers:testcontainers")
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:mongodb")
 
     itImplementation(project(":interop-completeness-client"))
     itImplementation(project)
