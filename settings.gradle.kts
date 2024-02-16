@@ -2,6 +2,7 @@ rootProject.name = "interop-completeness"
 
 include("interop-completeness-server")
 include("interop-completeness-client")
+include("interop-completeness-models")
 
 for (project in rootProject.children) {
     project.buildFileName = "${project.name}.gradle.kts"
