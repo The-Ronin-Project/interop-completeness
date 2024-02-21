@@ -17,6 +17,8 @@ services:
     ports:
       - "8080:8080"
     environment:
+      RONIN_AUTH_ISSUERS: "http://mock-oauth2:8080/completeness"
+      RONIN_AUTH_VALID-AUDIENCES: "https://interop-completeness.local.projectronin.io"
       SPRING_DATASOURCE_URL: "jdbc:oracle:thin:admin/Longpassword1@(description=(retry_count=0)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb-free))(connect_data=(service_name=my_atp_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=no)))"
       SPRING_DATA_MONGODB_URI: "mongodb://admin:Longpassword1@adb-free:27017/admin?authMechanism=PLAIN&authSource=$$external&ssl=true&retryWrites=false&loadBalanced=true&tlsInsecure=true"
     healthcheck:
@@ -28,6 +30,8 @@ services:
         condition: service_healthy
       adb_config:
         condition: service_completed_successfully
+      mock-oauth2:
+        condition: service_started
 
   adb-free:
     restart: on-failure
@@ -66,3 +70,12 @@ services:
     depends_on:
       adb-free:
         condition: service_healthy
+
+  mock-oauth2:
+    image: ghcr.io/navikt/mock-oauth2-server:0.5.4
+    ports:
+      - "8083:8080"
+    volumes:
+      - ./:/host
+    environment:
+      - JSON_CONFIG_PATH=/host/mock-oauth2-config.json

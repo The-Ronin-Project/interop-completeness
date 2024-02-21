@@ -11,9 +11,7 @@ plugins {
 dependencies {
     api(enforcedPlatform(libs.kotlin.bom))
     implementation(platform(libs.spring.boot.parent))
-    implementation(libs.spring.boot.starter)
-    implementation(libs.spring.boot.starter.actuator)
-    implementation(libs.spring.boot.starter.web)
+    implementation(libs.product.spring.webflux.starter)
     implementation(libs.spring.boot.starter.data.mongodb)
 
     implementation(libs.interop.event.completeness)

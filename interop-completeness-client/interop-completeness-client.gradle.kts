@@ -6,10 +6,6 @@ plugins {
 dependencies {
     implementation(platform(libs.spring.boot.parent))
 
-    implementation(platform(libs.spring.boot.parent))
-    implementation(libs.spring.boot.starter.actuator)
-    implementation(libs.spring.boot.starter.validation)
-
     implementation(libs.interop.common)
     implementation(libs.interop.commonHttp)
     implementation(libs.interop.commonJackson)

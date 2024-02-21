@@ -1,0 +1,22 @@
+{
+  "interactiveLogin": false,
+  "httpServer": "NettyWrapper",
+  "tokenCallbacks": [
+    {
+      "issuerId": "completeness",
+      "tokenExpiry": 1200,
+      "requestMappings": [
+        {
+          "requestParam": "client_id",
+          "match": "*",
+          "claims": {
+            "sub": "clientId@clients",
+            "aud": "https://interop-completeness.local.projectronin.io",
+            "iss": "http://mock-oauth2:8080/completeness",
+            "scope": "graphql:query"
+          }
+        }
+      ]
+    }
+  ]
+}
