@@ -1,9 +1,0 @@
-services:
-  completeness-server:
-    restart: on-failure
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: interop-completeness-server:local
-    ports:
-      - "8080:8080"

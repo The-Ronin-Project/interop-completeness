@@ -66,30 +66,3 @@ val graphqlGenerateSDL by tasks.getting(GraphQLGenerateSDLTask::class) {
 
 // We want to tie the GraphQL schema generation to the kotlin compile step.
 tasks.compileKotlin.get().finalizedBy(graphqlGenerateSDL)
-
-// Colima and Testcontainers appear to have issues on M1/M2, but we saw success with the actual Docker commands, so we're rewiring this project to not use Testcontainers
-val runDocker =
-    tasks.create("runDocker") {
-        doLast {
-            exec {
-                workingDir = file("./src/it/resources")
-                commandLine("docker compose -f docker-compose-it.yaml up -d --wait --wait-timeout 600".split(" "))
-            }
-        }
-    }
-
-tasks.named("itSetup").get().finalizedBy(runDocker)
-val itTask = tasks.named("it").get()
-itTask.dependsOn(runDocker)
-
-val stopDocker =
-    tasks.create("stopDocker") {
-        doLast {
-            exec {
-                workingDir = file("./src/it/resources")
-                commandLine("docker compose -f docker-compose-it.yaml down".split(" "))
-            }
-        }
-    }
-
-itTask.finalizedBy(stopDocker)
