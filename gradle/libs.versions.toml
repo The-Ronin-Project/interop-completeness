@@ -1,5 +1,5 @@
 [versions]
-datadog = "1.30.0"
+datadog = "1.30.1"
 dbrider = "1.39.0"
 graphql-kotlin = "7.0.2"
 interop-common = "4.1.0"
@@ -20,12 +20,12 @@ mockwebserver = "4.12.0"
 mongo = "4.11.1"
 oracle-db = "23.3.0.23.09"
 ronin-kafka = "1.1.2"
-ronin-product = "2.10.0"
+ronin-product = "2.10.3"
 ronin-test = "0.2.0"
-spring-boot = "3.2.2"
-spring-kafka = "3.1.1"
+spring-boot = "3.2.3"
+spring-kafka = "3.1.2"
 springdoc = "2.3.0"
-testcontainers = "1.19.5"
+testcontainers = "1.19.6"
 
 [libraries]
 dd-trace-api = { module = "com.datadoghq:dd-trace-api", version.ref = "datadog" }
