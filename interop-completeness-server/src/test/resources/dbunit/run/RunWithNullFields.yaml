@@ -1,0 +1,8 @@
+run:
+  - id: "0OjoCil6Sxm9WUuActucxA==" # UUID: d0e8e80a-297a-4b19-bd59-4b8072db9cc4
+    type: "AD_HOC"
+    tenant_id: "tenant1"
+    run_start_time: "2024-02-21 00:00:00 +0000"
+    status: "INCOMPLETE"
+    create_dt_tm: "2024-02-21 00:01:00 +0000"
+    event_dt_tm: "2024-02-20 23:59:00 +0000"

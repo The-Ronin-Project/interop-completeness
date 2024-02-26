@@ -1,0 +1,12 @@
+run:
+  - id: "0OjoCil6Sxm9WUuActucxA==" # UUID: d0e8e80a-297a-4b19-bd59-4b8072db9cc4
+    description: "run with backfill, has non-null description, has non-null run_end_time"
+    type: "BACKFILL"
+    tenant_id: "tenant1"
+    backfill_id: "tOjoCil6Sxm9WUuActucxA==" # UUID: b4e8e80a-297a-4b19-bd59-4b8072db9cc4
+    run_start_time: "2024-02-21 00:00:00 +0000"
+    run_end_time: "2024-02-21 00:00:00 -0300" # let's throw some timezones in
+    status: "SUCCESS"
+    status_message: "Successfully loaded"
+    create_dt_tm: "2024-02-21 00:01:00 +0000"
+    event_dt_tm: "2024-02-20 22:59:00 -0100" # let's throw some timezones in

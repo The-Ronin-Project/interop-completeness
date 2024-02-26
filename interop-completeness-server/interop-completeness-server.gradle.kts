@@ -13,6 +13,7 @@ dependencies {
     implementation(platform(libs.spring.boot.parent))
     implementation(libs.product.spring.webflux.starter)
     implementation(libs.spring.boot.starter.data.mongodb)
+    implementation(libs.spring.boot.starter.jdbc)
 
     implementation(libs.interop.event.completeness)
 
@@ -21,6 +22,7 @@ dependencies {
     implementation(libs.interop.common)
     implementation(libs.interop.commonHttp)
     implementation(libs.interop.commonJackson)
+    implementation(libs.interop.commonKtorm)
 
     implementation(libs.bundles.graphql)
     implementation(libs.dd.trace.api)
@@ -29,6 +31,7 @@ dependencies {
     implementation(libs.springdoc.openapi.ui)
 
     implementation(libs.bundles.ojdbc)
+    implementation(libs.ktorm.core)
 
     runtimeOnly(libs.liquibase.core)
     // Needed to format logs for DataDog
@@ -37,9 +40,13 @@ dependencies {
     testImplementation(platform(libs.testcontainers.bom))
     testImplementation(libs.mockk)
     testImplementation(libs.spring.boot.starter.test)
+    testImplementation(libs.interop.commonTestDb)
+    testRuntimeOnly(libs.mysql.connector.java)
+    testImplementation(libs.rider.core)
     testImplementation("org.testcontainers:testcontainers")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:mongodb")
+    testImplementation("org.testcontainers:mysql")
 
     itImplementation(project(":interop-completeness-client"))
     itImplementation(project)
