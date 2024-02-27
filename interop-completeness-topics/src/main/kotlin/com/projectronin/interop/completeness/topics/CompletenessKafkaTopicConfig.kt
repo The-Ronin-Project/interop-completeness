@@ -1,4 +1,4 @@
-package com.projectronin.interop.completeness.models.kafka
+package com.projectronin.interop.completeness.topics
 
 import com.projectronin.interop.kafka.spring.KafkaConfig
 import org.springframework.context.annotation.Bean
@@ -9,7 +9,8 @@ class CompletenessKafkaTopicConfig(kafkaConfig: KafkaConfig) {
     private val vendor = kafkaConfig.cloud.vendor
     private val region = kafkaConfig.cloud.region
     private val systemName = kafkaConfig.retrieve.serviceId
-    val schemaBase = "https://github.com/projectronin/contract-event-interop-completeness/blob/main/src/main/resources/schemas"
+    val schemaBase =
+        "https://github.com/projectronin/contract-event-interop-completeness/blob/main/src/main/resources/schemas"
 
     @Bean
     fun dagRegistration(): InteropCompletenessKafkaTopic = createTopic(topicName = "dag-registration", schemaName = "dag-registration-v1")

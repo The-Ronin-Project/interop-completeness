@@ -1,6 +1,5 @@
-package com.projectronin.interop.completeness.kafka
+package com.projectronin.interop.completeness.topics
 
-import com.projectronin.interop.completeness.models.kafka.CompletenessKafkaTopicConfig
 import com.projectronin.interop.kafka.spring.KafkaConfig
 import io.mockk.every
 import io.mockk.mockk

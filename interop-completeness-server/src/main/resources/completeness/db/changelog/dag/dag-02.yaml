@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: dag-rename-resource
+      author: Josh Smith
+      preConditions:
+        - onFail: MARK_RAN
+          not:
+            - columnExists:
+                tableName: dag
+                columnName: resource_type
+      changes:
+        - renameColumn:
+            tableName: dag
+            oldColumnName: resource
+            newColumnName: resource_type
+            columnDataType: VARCHAR(32)
