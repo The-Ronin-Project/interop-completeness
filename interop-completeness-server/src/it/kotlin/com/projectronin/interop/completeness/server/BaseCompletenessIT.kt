@@ -41,24 +41,4 @@ abstract class BaseCompletenessIT {
         )
 
     protected val mongoDatabase = mongoClient.getDatabase("admin")
-
-    protected fun readTable(table: String): List<Map<String, String>> {
-        val rows = mutableListOf<Map<String, String>>()
-        dataSource.connection.use { connection ->
-            connection.prepareStatement("SELECT * FROM $table").use { preparedStatement ->
-                preparedStatement.executeQuery().use { resultSet ->
-                    while (resultSet.next()) {
-                        val columns =
-                            (1..resultSet.metaData.columnCount).map { index ->
-                                val label = resultSet.metaData.getColumnLabel(index).lowercase()
-                                val value = resultSet.getString(index)
-                                label to value
-                            }.toMap()
-                        rows.add(columns)
-                    }
-                }
-            }
-        }
-        return rows
-    }
 }

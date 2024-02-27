@@ -16,6 +16,9 @@ import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import java.util.UUID
 
+/**
+ * Manages a Kafka Stream for reading in DAG registration events and persisting them to our DB.
+ */
 @Service
 class DagStream(
     private val clusterProperties: ClusterProperties,

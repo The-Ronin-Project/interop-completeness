@@ -37,7 +37,7 @@ class DagStreamIT : BaseKafkaIT() {
         val event = createEvent(registration)
         publishEvents(kafkaTopicConfig.dagRegistration(), listOf(event))
 
-        // delay to give a change to pick it up
+        // delay to give a chance to pick it up
         runBlocking { delay(1000) }
 
         val postEvent = dagDAO.findResourcesThatTrigger("Condition")
@@ -66,7 +66,7 @@ class DagStreamIT : BaseKafkaIT() {
         val event = createEvent(registration)
         publishEvents(kafkaTopicConfig.dagRegistration(), listOf(event))
 
-        // delay to give a change to pick it up
+        // delay to give a chance to pick it up
         runBlocking { delay(1000) }
 
         val postEvent = dagDAO.findResourcesThatTrigger("Condition")
