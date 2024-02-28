@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.graphql)
+    alias(libs.plugins.interop.sonarqube) apply false
 }
 
 dependencies {
@@ -17,5 +18,13 @@ graphql {
             listOf(
                 file("$queryDirectory/DAGQuery.graphql"),
             )
+    }
+}
+
+ktlint {
+    filter {
+        exclude {
+            it.file.path.contains("/generated/")
+        }
     }
 }
