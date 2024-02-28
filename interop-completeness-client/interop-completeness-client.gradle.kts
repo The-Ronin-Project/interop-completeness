@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.graphql)
-    alias(libs.plugins.interop.sonarqube) apply false
 }
 
 dependencies {
@@ -27,4 +26,8 @@ ktlint {
             it.file.path.contains("/generated/")
         }
     }
+}
+
+sonar {
+    isSkipProject = true
 }
