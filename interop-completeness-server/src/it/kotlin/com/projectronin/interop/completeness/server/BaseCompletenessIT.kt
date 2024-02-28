@@ -19,7 +19,7 @@ abstract class BaseCompletenessIT {
 
     protected val serverUrl = "http://localhost:8080"
     protected val graphqlEndpoint = "$serverUrl/graphql"
-    protected val oath2Endpoint = "http://mock-oauth2:8080/completeness"
+    protected val oath2Endpoint = "http://localhost:8083/completeness"
     protected val httpClient = HttpSpringConfig().getHttpClient()
 
     @Suppress("ktlint:standard:max-line-length")

@@ -21,15 +21,16 @@ import java.time.OffsetDateTime
 class DagHandlerIT : BaseCompletenessIT() {
     private val database = Database.connectWithSpringSupport(dataSource)
     private val dagDAO = DagDAO(database)
-    private val authenticationService = InteropAuthenticationService(
-        httpClient,
-        AuthenticationConfig(
-            token = Token(url = oath2Endpoint),
-            audience = "https://interop-completeness.local.projectronin.io",
-            client = Client("client-id", "client-secret"),
-            method = AuthMethod.STANDARD,
+    private val authenticationService =
+        InteropAuthenticationService(
+            httpClient,
+            AuthenticationConfig(
+                token = Token(url = oath2Endpoint),
+                audience = "https://interop-completeness.local.projectronin.io",
+                client = Client("client-id", "client-secret"),
+                method = AuthMethod.STANDARD,
+            ),
         )
-    )
     private val graphQlClient = GraphQLKtorClient(URL(graphqlEndpoint), httpClient)
 
     @Test
