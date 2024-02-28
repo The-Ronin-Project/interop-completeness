@@ -25,7 +25,7 @@ class DagHandlerIT : BaseCompletenessIT() {
         httpClient,
         AuthenticationConfig(
             token = Token(url = oath2Endpoint),
-            audience = "https://ehr.dev.projectronin.io",
+            audience = "https://interop-completeness.local.projectronin.io",
             client = Client("client-id", "client-secret"),
             method = AuthMethod.STANDARD,
         )
