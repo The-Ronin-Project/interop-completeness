@@ -1,0 +1,8 @@
+query DAGQuery {
+    dag {
+        nodes {
+            resource
+            consumedResources
+        }
+    }
+}

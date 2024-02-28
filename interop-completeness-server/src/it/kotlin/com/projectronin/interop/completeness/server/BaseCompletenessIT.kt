@@ -18,6 +18,7 @@ abstract class BaseCompletenessIT {
     }
 
     protected val serverUrl = "http://localhost:8080"
+    protected val graphqlEndpoint = "$serverUrl/graphql"
     protected val httpClient = HttpSpringConfig().getHttpClient()
 
     @Suppress("ktlint:standard:max-line-length")

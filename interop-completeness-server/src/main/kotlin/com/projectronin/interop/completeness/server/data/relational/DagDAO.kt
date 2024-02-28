@@ -7,7 +7,10 @@ import com.projectronin.interop.completeness.server.data.relational.model.DagDO
 import org.ktorm.database.Database
 import org.ktorm.dsl.delete
 import org.ktorm.dsl.eq
+import org.ktorm.dsl.from
 import org.ktorm.dsl.insert
+import org.ktorm.dsl.map
+import org.ktorm.dsl.select
 import org.ktorm.schema.Column
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
@@ -22,6 +25,14 @@ import java.util.UUID
 @Repository
 class DagDAO(database: Database) : BaseInteropDAO<DagDO, UUID>(database) {
     override val primaryKeyColumn: Column<UUID> = DagDOs.id
+
+    /**
+     * Find all [DagDO]s
+     */
+    fun findAll(): List<DagDO> =
+        database.from(DagDOs)
+            .select()
+            .map { DagDOs.createEntity(it) }
 
     /**
      * Find [DagDO]s by the subscribesTo field
