@@ -1,9 +1,13 @@
+import com.expediagroup.graphql.plugin.gradle.config.GraphQLSerializer
+
 plugins {
     alias(libs.plugins.graphql)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 dependencies {
     api(libs.graphql.kotlin.client.ktor)
+    api(libs.graphql.kotlin.client.serialization)
 }
 
 graphql {
@@ -17,6 +21,7 @@ graphql {
             listOf(
                 file("$queryDirectory/DAGQuery.graphql"),
             )
+        serializer = GraphQLSerializer.KOTLINX
     }
 }
 
