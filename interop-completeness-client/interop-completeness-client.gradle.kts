@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    api(libs.graphql.kotlin.client.spring)
+    api(libs.graphql.kotlin.client.ktor)
 }
 
 graphql {

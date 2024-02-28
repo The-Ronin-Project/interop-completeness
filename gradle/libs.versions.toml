@@ -34,6 +34,7 @@ dd-trace-api = { module = "com.datadoghq:dd-trace-api", version.ref = "datadog" 
 graphql-kotlin-schema-generator = { module = "com.expediagroup:graphql-kotlin-schema-generator", version.ref = "graphql-kotlin" }
 graphql-kotlin-spring-server = { module = "com.expediagroup:graphql-kotlin-spring-server", version.ref = "graphql-kotlin" }
 graphql-kotlin-client-core = { module = "com.expediagroup:graphql-kotlin-client", version.ref = "graphql-kotlin" }
+graphql-kotlin-client-ktor = { module = "com.expediagroup:graphql-kotlin-ktor-client", version.ref = "graphql-kotlin" }
 graphql-kotlin-client-spring = { module = "com.expediagroup:graphql-kotlin-spring-client", version.ref = "graphql-kotlin" }
 interop-common = { module = "com.projectronin.interop:interop-common", version.ref = "interop-common" }
 interop-commonHttp = { module = "com.projectronin.interop:interop-common-http", version.ref = "interop-common" }
