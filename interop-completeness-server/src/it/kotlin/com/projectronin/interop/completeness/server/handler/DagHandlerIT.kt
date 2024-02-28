@@ -25,7 +25,7 @@ class DagHandlerIT : BaseCompletenessIT() {
         InteropAuthenticationService(
             httpClient,
             AuthenticationConfig(
-                token = Token(url = oath2Endpoint),
+                token = Token(url = oauth2Endpoint),
                 audience = "https://interop-completeness.local.projectronin.io",
                 client = Client("client-id", "client-secret"),
                 method = AuthMethod.STANDARD,
