@@ -5,7 +5,7 @@ import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClients
 import com.projectronin.interop.common.http.spring.HttpSpringConfig
 import oracle.jdbc.pool.OracleDataSource
-import org.junit.jupiter.api.AfterEach
+import org.ktorm.database.Database
 
 abstract class BaseCompletenessIT {
     init {
@@ -29,6 +29,7 @@ abstract class BaseCompletenessIT {
             user = "admin"
             setPassword("Longpassword1")
         }
+    protected val ktormDatabase = Database.connect(dataSource)
 
     @Suppress("ktlint:standard:max-line-length")
     private val mongoClient =
@@ -41,8 +42,4 @@ abstract class BaseCompletenessIT {
         )
 
     protected val mongoDatabase = mongoClient.getDatabase("admin")
-
-    @AfterEach
-    fun tearDown() {
-    }
 }
