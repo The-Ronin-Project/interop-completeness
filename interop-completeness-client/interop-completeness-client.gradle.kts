@@ -1,16 +1,21 @@
 plugins {
-    alias(libs.plugins.interop.gradle.junit)
-    alias(libs.plugins.interop.gradle.spring.framework)
+    alias(libs.plugins.graphql)
 }
 
 dependencies {
-    implementation(platform(libs.spring.boot.parent))
+    api(libs.graphql.kotlin.client.spring)
+}
 
-    implementation(libs.interop.common)
-    implementation(libs.interop.commonHttp)
-    implementation(libs.interop.commonJackson)
-    implementation(libs.jakarta.validation.api)
+graphql {
+    client {
+        val queryDirectory = "${project.projectDir}/src/main/resources"
+        val schemaPath = "${project.projectDir}/../interop-completeness-server/completenessSchema.graphql"
 
-    testImplementation(libs.mockk)
-    testImplementation(libs.mockwebserver)
+        packageName = "com.projectronin.interop.completeness.client.generated"
+        schemaFile = file(schemaPath)
+        queryFiles =
+            listOf(
+                file("$queryDirectory/DAGQuery.graphql"),
+            )
+    }
 }

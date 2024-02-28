@@ -87,7 +87,7 @@ class DagDAOTest {
             dao.findResourcesThatTrigger("MedicationAdministration")
                 .first { it.subscribesTo == "Patient" }
         assertNotNull(newNode)
-        assertEquals(newUuids.first(), newNode!!.id)
+        assertEquals(newUuids.first(), newNode.id)
         assertEquals("MedicationAdministration", newNode.resource)
         assertEquals("Patient", newNode.subscribesTo)
         assertWasRecent(newNode.createDateTime)
