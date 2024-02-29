@@ -21,11 +21,11 @@ mockwebserver = "4.12.0"
 mongo = "5.0.0"
 mysql = "8.0.33"
 oracle-db = "23.3.0.23.09"
+ronin-common-kafka = "2.1.12"
 ronin-kafka = "1.1.2"
 ronin-product = "2.10.4"
 ronin-test = "0.2.0"
 spring-boot = "3.2.3"
-spring-kafka = "3.1.2"
 springdoc = "2.3.0"
 testcontainers = "1.19.6"
 
@@ -51,6 +51,7 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktorm-core = { module = "org.ktorm:ktorm-core", version.ref = "ktorm" }
+ktorm-support-oracle = { module = "org.ktorm:ktorm-support-oracle", version.ref = "ktorm" }
 liquibase-core = { module = "org.liquibase:liquibase-core", version.ref = "liquibase" }
 logstash-logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
@@ -62,13 +63,14 @@ oracle-ucp = { module = "com.oracle.database.jdbc:ucp", version.ref = "oracle-db
 product-spring-webflux-starter = { module = "com.projectronin:product-spring-webflux-starter", version.ref = "ronin-product" }
 # @keep Wants to throw this out during upgrades for some reason.
 rider-core = { module = "com.github.database-rider:rider-core", version.ref = "dbrider" }
+ronin-common-kafka = { module = "com.projectronin:kafka", version.ref = "ronin-common-kafka" }
+# ITs still need this for now
 ronin-kafka = { module = "com.projectronin:ronin-kafka", version.ref = "ronin-kafka" }
 ronin-test-data-generator = { module = "com.projectronin.test:ronin-test-data-generator", version.ref = "ronin-test" }
 spring-boot-parent = { module = "org.springframework.boot:spring-boot-parent", version.ref = "spring-boot" }
 spring-boot-starter-data-mongodb = { module = "org.springframework.boot:spring-boot-starter-data-mongodb", version.ref = "spring-boot" }
 spring-boot-starter-jdbc = { module = "org.springframework.boot:spring-boot-starter-jdbc", version.ref = "spring-boot" }
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "spring-boot" }
-spring-kafka = { module = "org.springframework.kafka:spring-kafka", version.ref = "spring-kafka" }
 springdoc-openapi-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
 testcontainers-bom = { module = "org.testcontainers:testcontainers-bom", version.ref = "testcontainers" }
 

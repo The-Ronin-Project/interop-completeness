@@ -9,6 +9,7 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":interop-completeness-topics"))
     api(enforcedPlatform(libs.kotlin.bom))
     implementation(platform(libs.spring.boot.parent))
     implementation(libs.product.spring.webflux.starter)
@@ -16,8 +17,6 @@ dependencies {
     implementation(libs.spring.boot.starter.jdbc)
 
     implementation(libs.interop.event.completeness)
-
-    implementation(libs.spring.kafka)
 
     implementation(libs.interop.common)
     implementation(libs.interop.commonHttp)
@@ -27,13 +26,17 @@ dependencies {
     implementation(libs.bundles.graphql)
     implementation(libs.dd.trace.api)
 
-    implementation(libs.ronin.kafka)
+    implementation(libs.ronin.common.kafka)
+    implementation(libs.interop.kafka) {
+        exclude(module = "ronin-kafka")
+    }
     implementation(libs.springdoc.openapi.ui)
 
     implementation(libs.bundles.ojdbc)
     implementation(libs.ktorm.core)
 
     runtimeOnly(libs.liquibase.core)
+    runtimeOnly(libs.ktorm.support.oracle)
     // Needed to format logs for DataDog
     runtimeOnly(libs.logstash.logback.encoder)
 
@@ -49,6 +52,7 @@ dependencies {
     testImplementation("org.testcontainers:mysql")
 
     itImplementation(project(":interop-completeness-client"))
+    itImplementation(project(":interop-completeness-topics"))
     itImplementation(project)
     itImplementation(platform(libs.testcontainers.bom))
     itImplementation("org.testcontainers:testcontainers")
@@ -57,13 +61,18 @@ dependencies {
     itImplementation(libs.interop.commonHttp)
     itImplementation(libs.interop.commonJackson)
     itImplementation(libs.interop.kafka.events.internal)
+    itImplementation(libs.interop.event.completeness)
     itImplementation(libs.interop.fhir)
     itImplementation(libs.interop.fhir.generators)
     itImplementation(libs.interop.kafka)
+    itImplementation(libs.ronin.kafka)
     itImplementation(libs.interop.kafka.testing.client)
     itImplementation(libs.ronin.test.data.generator)
     itImplementation(libs.bundles.ojdbc)
     itImplementation(libs.mongo)
+    itImplementation(libs.ktorm.core)
+    itImplementation(libs.interop.commonKtorm)
+    itRuntimeOnly(libs.ktorm.support.oracle)
 }
 
 val graphqlGenerateSDL by tasks.getting(GraphQLGenerateSDLTask::class) {

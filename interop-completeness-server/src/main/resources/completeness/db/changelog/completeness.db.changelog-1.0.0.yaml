@@ -5,3 +5,5 @@ databaseChangeLog:
       file: completeness/db/changelog/run/run-01.yaml
   - include:
       file: completeness/db/changelog/dag/dag-01.yaml
+  - include:
+      file: completeness/db/changelog/dag/dag-02.yaml

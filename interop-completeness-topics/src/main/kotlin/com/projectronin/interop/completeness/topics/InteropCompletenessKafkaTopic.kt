@@ -1,4 +1,4 @@
-package com.projectronin.interop.completeness.models.kafka
+package com.projectronin.interop.completeness.topics
 
 import com.projectronin.interop.kafka.model.KafkaTopic
 
