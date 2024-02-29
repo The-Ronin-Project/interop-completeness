@@ -27,6 +27,19 @@ class DagDAOTest {
 
     @Test
     @DataSet(value = ["/dbunit/dag/SimpleDag.yaml"], cleanAfter = true)
+    fun `findAll - can find all`() {
+        val dao = DagDAO(KtormHelper.database())
+        val found = dao.findAll()
+
+        assertEquals(4, found.size)
+        assertNotNull(found.firstOrNull { it.resource == "Medication" && it.subscribesTo == "Patient" })
+        assertNotNull(found.firstOrNull { it.resource == "Appointment" && it.subscribesTo == "Patient" })
+        assertNotNull(found.firstOrNull { it.resource == "Condition" && it.subscribesTo == "Patient" })
+        assertNotNull(found.firstOrNull { it.resource == "MedicationAdministration" && it.subscribesTo == "Medication" })
+    }
+
+    @Test
+    @DataSet(value = ["/dbunit/dag/SimpleDag.yaml"], cleanAfter = true)
     fun `findResourcesThatSubscribeTo - can find multiple`() {
         val dao = DagDAO(KtormHelper.database())
         val found = dao.findResourcesThatSubscribeTo("Patient")
