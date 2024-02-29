@@ -1,3 +1,4 @@
+import com.expediagroup.graphql.plugin.gradle.config.GraphQLSerializer
 import com.expediagroup.graphql.plugin.gradle.tasks.GraphQLGenerateSDLTask
 
 plugins {
@@ -51,12 +52,16 @@ dependencies {
     testImplementation("org.testcontainers:mongodb")
     testImplementation("org.testcontainers:mysql")
 
-    itImplementation(project(":interop-completeness-client"))
     itImplementation(project(":interop-completeness-topics"))
     itImplementation(project)
     itImplementation(platform(libs.testcontainers.bom))
     itImplementation("org.testcontainers:testcontainers")
     itImplementation(libs.bundles.ktor)
+    // these dependencies need to be available at compile time for graphql to generate them for ITs
+    compileOnly(libs.graphql.kotlin.client.ktor)
+    compileOnly(libs.graphql.kotlin.client.serialization)
+    itImplementation(libs.graphql.kotlin.client.ktor)
+    itImplementation(libs.graphql.kotlin.client.serialization)
     itImplementation(libs.kotlinx.coroutines.core)
     itImplementation(libs.ktorm.core)
     itImplementation(libs.interop.commonHttp)
@@ -84,3 +89,19 @@ val graphqlGenerateSDL by tasks.getting(GraphQLGenerateSDLTask::class) {
 
 // We want to tie the GraphQL schema generation to the kotlin compile step.
 tasks.compileKotlin.get().finalizedBy(graphqlGenerateSDL)
+
+// Configures the GraphQL Client that we're using in integration tests
+graphql {
+    client {
+        val queryDirectory = "${project.projectDir}/src/it/resources/graphql"
+        val schemaPath = "${project.projectDir}/completenessSchema.graphql"
+
+        packageName = "com.projectronin.interop.completeness.client.generated"
+        schemaFile = file(schemaPath)
+        queryFiles =
+            listOf(
+                file("$queryDirectory/DAGQuery.graphql"),
+            )
+        serializer = GraphQLSerializer.KOTLINX
+    }
+}
