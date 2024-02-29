@@ -105,3 +105,11 @@ graphql {
         serializer = GraphQLSerializer.KOTLINX
     }
 }
+
+ktlint {
+    filter {
+        exclude {
+            it.file.path.contains("/generated/")
+        }
+    }
+}
