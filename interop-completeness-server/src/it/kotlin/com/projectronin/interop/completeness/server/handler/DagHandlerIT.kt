@@ -1,6 +1,7 @@
 package com.projectronin.interop.completeness.server.handler
 
 import com.expediagroup.graphql.client.ktor.GraphQLKtorClient
+import com.expediagroup.graphql.client.serialization.GraphQLClientKotlinxSerializer
 import com.projectronin.interop.common.http.auth.AuthMethod
 import com.projectronin.interop.common.http.auth.AuthenticationConfig
 import com.projectronin.interop.common.http.auth.Client
@@ -31,7 +32,12 @@ class DagHandlerIT : BaseCompletenessIT() {
                 method = AuthMethod.STANDARD,
             ),
         )
-    private val graphQlClient = GraphQLKtorClient(URL(graphqlEndpoint), httpClient)
+    private val graphQlClient =
+        GraphQLKtorClient(
+            url = URL(graphqlEndpoint),
+            httpClient = httpClient,
+            serializer = GraphQLClientKotlinxSerializer(),
+        )
 
     @Test
     fun `check DAG can be fetched`() {

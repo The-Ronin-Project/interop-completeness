@@ -19,7 +19,7 @@ graphql {
             listOf(
                 file("$queryDirectory/DAGQuery.graphql"),
             )
-        serializer = GraphQLSerializer.JACKSON
+        serializer = GraphQLSerializer.KOTLINX
     }
 }
 
