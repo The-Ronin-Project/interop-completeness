@@ -52,8 +52,7 @@ class DagHandlerIT : BaseCompletenessIT() {
                     bearerAuth(token.accessToken)
                 }
             }
-        response.errors?.let { println("Found errors querying DAG: ${response.errors}") }
-        response.data?.let { println("Found DAG: ${response.data}") }
+        assertTrue(response.errors == null || response.errors!!.isEmpty())
         val medicationAdministrationNode = response.data!!.dag.nodes.first { it.resource == "MedicationAdministration" }
         assertEquals(2, medicationAdministrationNode.consumedResources.size)
         assertTrue("Patient" in medicationAdministrationNode.consumedResources)
