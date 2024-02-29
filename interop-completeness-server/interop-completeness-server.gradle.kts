@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.interop.gradle.spring.boot)
     alias(libs.plugins.interop.gradle.docker.integration)
     alias(libs.plugins.graphql)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 dependencies {
